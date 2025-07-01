@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ScamShield - Universal Scam Detector. Protect yourself and your family from scams, phishing, and fraud attempts.">
+    <meta name="keywords" content="scam detector, phishing protection, fraud prevention, online safety, cybersecurity">
+    <meta name="author" content="ScamShield">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/ScamShield/">
+    <meta property="og:title" content="ScamShield - Universal Scam Detector">
+    <meta property="og:description" content="Protect yourself and your family from scams, phishing, and fraud attempts. Free, instant, and easy to use.">
+    <meta property="og:image" content="assets/images/scamshield-preview.png">
+    
+    <title>ScamShield - Universal Scam Detector | Protect Yourself from Scams</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --safe-color: #27ae60;
+            --neutral-color: #95a5a6;
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo::before {
+            content: '🛡️';
+            margin-right: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--neutral-color);
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            color: var(--text-color);
+            border: 2px solid #e9ecef;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title::before {
+            font-size: 1.8rem;
+        }
+
+        .scam-detector .card-title::before { content: '🚨'; }
+        .url-checker .card-title::before { content: '🌐'; }
+        .phone-checker .card-title::before { content: '📞'; }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-safe {
+            background: #d4edda;
+            border-color: var(--safe-color);
+            color: #155724;
+        }
+
+        .result-danger {
+            background: #f8d7da;
+            border-color: var(--danger-color);
+            color: #721c24;
+        }
+
+        .result-warning {
+            background: #fff3cd;
+            border-color: var(--warning-color);
+            color: #856404;
+        }
+
+        .result-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-description {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .tips-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .tips-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tips-title::before {
+            content: '💡';
+            margin-right: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .footer-content {
+            color: var(--neutral-color);
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">ScamShield</h1>
+            <p class="subtitle">Universal Scam Detector - Protect Yourself & Your Family</p>
+            <div class="stats">
+                <span class="stat-item">🛡️ 100% Free</span>
+                <span class="stat-item">⚡ Instant Analysis</span>
+                <span class="stat-item">👨‍👩‍👧‍👦 Family Safe</span>
+                <span class="stat-item">🔒 Private & Secure</span>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <!-- Message/Email Scam Detector -->
+            <section class="card scam-detector">
+                <h2 class="card-title">Message & Email Scanner</h2>
+                <div class="input-group">
+                    <label class="input-label" for="messageInput">Paste suspicious message, email, or text:</label>
+                    <textarea 
+                        class="input-field" 
+                        id="messageInput" 
+                        placeholder="Example: 'Your package is delayed. Click here to track: suspicious-link.com' or 'Your account will be closed unless you verify immediately...'"
+                        rows="4"
+                    ></textarea>
+                </div>
+                <button class="btn" onclick="analyzeMessage()">🔍 Analyze Message</button>
+                <div class="result-box" id="messageResult"></div>
+            </section>
+
+            <!-- URL Safety Checker -->
+            <section class="card url-checker">
+                <h2 class="card-title">Website Safety Checker</h2>
+                <div class="input-group">
+                    <label class="input-label" for="urlInput">Enter website URL:</label>
+                    <input 
+                        type="text" 
+                        class="input-field" 
+                        id="urlInput" 
+                        placeholder="https://example.com or suspicious-website.com"
+                        style="min-height: auto;"
+                    >
+                </div>
+                <button class="btn" onclick="checkURL()">🌐 Check Website</button>
+                <div class="result-box" id="urlResult"></div>
+            </section>
+
+            <!-- Phone Number Checker -->
+            <section class="card phone-checker">
+                <h2 class="card-title">Phone Number Scanner</h2>
+                <div class="input-group">
+                    <label class="input-label" for="phoneInput">Enter phone number:</label>
+                    <input 
+                        type="text" 
+                        class="input-field" 
+                        id="phoneInput" 
+                        placeholder="+1-555-123-4567 or (555) 123-4567"
+                        style="min-height: auto;"
+                    >
+                </div>
+                <button class="btn" onclick="checkPhone()">📞 Check Number</button>
+                <div class="result-box" id="phoneResult"></div>
+            </section>
+        </main>
+
+        <section class="tips-section">
+            <h2 class="tips-title">How to Stay Safe Online</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <div class="tip-title">🚨 Red Flags to Watch For</div>
+                    <p>Urgent language, threats of account closure, requests for passwords, or "limited time offers" are common scam tactics.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">🔗 Never Click Suspicious Links</div>
+                    <p>Hover over links to see the real destination. Legitimate companies don't send links asking for personal information.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">📞 Verify Before You Trust</div>
+                    <p>If someone claims to be from your bank or a company, hang up and call the official number to verify.</p>
+                </div>
+                <div class="tip-item">
+                    <div class="tip-title">👨‍👩‍👧‍👦 Educate Your Family</div>
+                    <p>Share this tool with family members, especially elderly relatives who are often targeted by scammers.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p><strong>ScamShield</strong> - Protecting families from online scams since 2025</p>
+                <p>This tool analyzes patterns locally in your browser. No data is sent to external servers.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername/ScamShield">⭐ Star on GitHub</a>
+                    <a href="https://github.com/yourusername/ScamShield/issues">🐛 Report Issue</a>
+                    <a href="#share">📢 Share with Family</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        console.log('🛡️ ScamShield loading...');
+
+        // Common scam indicators and patterns
+        const scamPatterns = {
+            urgentWords: ['urgent', 'immediate', 'expire', 'suspend', 'verify now', 'act now', 'limited time', 'expires today'],
+            threatWords: ['suspend', 'close', 'terminate', 'block', 'freeze', 'cancel', 'delete'],
+            actionWords: ['click here', 'click now', 'verify', 'confirm', 'update', 'download', 'install'],
+            moneyWords: ['refund', 'claim', 'prize', 'winner', 'lottery', 'inheritance', 'million', 'tax refund'],
+            impersonation: ['amazon', 'paypal', 'bank', 'irs', 'fedex', 'ups', 'netflix', 'apple', 'microsoft'],
+            suspiciousPhrasess: [
+                'click to verify', 'suspended account', 'urgent action required', 
+                'confirm your identity', 'update payment', 'security alert',
+                'package delivery failed', 'tax refund available', 'you have won'
+            ]
+        };
+
+        const suspiciousDomains = [
+            'bit.ly', 'tinyurl.com', 'short.link', 'suspicious-bank.com',
+            'verify-account.net', 'security-alert.org', 'package-delivery.info'
+        ];
+
+        const knownScamNumbers = [
+            '+1-555-SCAM', '+1-800-FAKE', '+1-888-FRAUD'
+        ];
+
+        function analyzeMessage() {
+            console.log('Analyzing message...');
+            const message = document.getElementById('messageInput').value.toLowerCase();
+            const resultDiv = document.getElementById('messageResult');
+            
+            if (!message.trim()) {
+                showResult(resultDiv, 'warning', '⚠️', 'Please enter a message', 'Paste the suspicious message you received to analyze it for scam indicators.');
+                return;
+            }
+
+            let scamScore = 0;
+            let detectedPatterns = [];
+
+            // Check for urgent/threat words
+            scamPatterns.urgentWords.forEach(word => {
+                if (message.includes(word)) {
+                    scamScore += 2;
+                    detectedPatterns.push(`Urgent language: "${word}"`);
+                }
+            });
+
+            scamPatterns.threatWords.forEach(word => {
+                if (message.includes(word)) {
+                    scamScore += 3;
+                    detectedPatterns.push(`Threatening language: "${word}"`);
+                }
+            });
+
+            // Check for suspicious phrases
+            scamPatterns.suspiciousPhrasess.forEach(phrase => {
+                if (message.includes(phrase)) {
+                    scamScore += 4;
+                    detectedPatterns.push(`Suspicious phrase: "${phrase}"`);
+                }
+            });
+
+            // Check for money-related words
+            scamPatterns.moneyWords.forEach(word => {
+                if (message.includes(word)) {
+                    scamScore += 2;
+                    detectedPatterns.push(`Money-related: "${word}"`);
+                }
+            });
+
+            // Check for impersonation
+            scamPatterns.impersonation.forEach(company => {
+                if (message.includes(company)) {
+                    scamScore += 1;
+                    detectedPatterns.push(`Mentions: "${company}"`);
+                }
+            });
+
+            // Check for suspicious domains
+            suspiciousDomains.forEach(domain => {
+                if (message.includes(domain)) {
+                    scamScore += 5;
+                    detectedPatterns.push(`Suspicious link: "${domain}"`);
+                }
+            });
+
+            // Determine result
+            let result = { type: 'safe', icon: '✅', title: 'Looks Safe', description: 'No obvious scam indicators detected.' };
+            
+            if (scamScore >= 8) {
+                result = {
+                    type: 'danger',
+                    icon: '🚨',
+                    title: 'HIGH RISK - Likely Scam!',
+                    description: `This message shows multiple scam indicators. Do NOT click any links or provide personal information. ${detectedPatterns.length > 0 ? 'Detected: ' + detectedPatterns.slice(0, 3).join(', ') : ''}`
+                };
+            } else if (scamScore >= 4) {
+                result = {
+                    type: 'warning',
+                    icon: '⚠️',
+                    title: 'SUSPICIOUS - Be Careful!',
+                    description: `This message has some concerning elements. Verify the sender through official channels before taking any action. ${detectedPatterns.length > 0 ? 'Detected: ' + detectedPatterns.slice(0, 2).join(', ') : ''}`
+                };
+            } else if (scamScore >= 1) {
+                result = {
+                    type: 'warning',
+                    icon: '🤔',
+                    title: 'Possibly Suspicious',
+                    description: `Some minor concerns detected. When in doubt, verify with the sender through official channels. ${detectedPatterns.length > 0 ? 'Detected: ' + detectedPatterns[0] : ''}`
+                };
+            }
+
+            showResult(resultDiv, result.type, result.icon, result.title, result.description);
+            console.log('Message analysis complete:', result);
+        }
+
+        function checkURL() {
+            console.log('Checking URL...');
+            const url = document.getElementById('urlInput').value.toLowerCase();
+            const resultDiv = document.getElementById('urlResult');
+            
+            if (!url.trim()) {
+                showResult(resultDiv, 'warning', '⚠️', 'Please enter a URL', 'Enter the website address you want to check for safety.');
+                return;
+            }
+
+            let isSuspicious = false;
+            let reason = '';
+
+            // Check against known suspicious domains
+            suspiciousDomains.forEach(domain => {
+                if (url.includes(domain)) {
+                    isSuspicious = true;
+                    reason = `Known suspicious domain: ${domain}`;
+                }
+            });
+
+            // Check for common scam URL patterns
+            const suspiciousPatterns = [
+                'verify-account', 'security-alert', 'urgent-update', 'confirm-identity',
+                'suspended-account', 'payment-required', 'claim-refund'
+            ];
+
+            suspiciousPatterns.forEach(pattern => {
+                if (url.includes(pattern)) {
+                    isSuspicious = true;
+                    reason = `Suspicious URL pattern: ${pattern}`;
+                }
+            });
+
+            // Check for URL shorteners (can hide real destination)
+            const shorteners = ['bit.ly', 'tinyurl', 't.co', 'short.link'];
+            shorteners.forEach(shortener => {
+                if (url.includes(shortener)) {
+                    isSuspicious = true;
+                    reason = `URL shortener detected: ${shortener} (can hide real destination)`;
+                }
+            });
+
+            let result;
+            if (isSuspicious) {
+                result = {
+                    type: 'danger',
+                    icon: '🚨',
+                    title: 'SUSPICIOUS WEBSITE!',
+                    description: `This URL shows warning signs. ${reason}. Do not enter personal information or download anything from this site.`
+                };
+            } else {
+                result = {
+                    type: 'safe',
+                    icon: '✅',
+                    title: 'No Obvious Red Flags',
+                    description: 'This URL doesn\'t match known scam patterns. However, always be cautious with personal information online.'
+                };
+            }
+
+            showResult(resultDiv, result.type, result.icon, result.title, result.description);
+            console.log('URL check complete:', result);
+        }
+
+        function checkPhone() {
+            console.log('Checking phone number...');
+            const phone = document.getElementById('phoneInput').value;
+            const resultDiv = document.getElementById('phoneResult');
+            
+            if (!phone.trim()) {
+                showResult(resultDiv, 'warning', '⚠️', 'Please enter a phone number', 'Enter the phone number you want to check.');
+                return;
+            }
+
+            let isSuspicious = false;
+            let reason = '';
+
+            // Check against known scam numbers
+            knownScamNumbers.forEach(scamNumber => {
+                if (phone.includes(scamNumber)) {
+                    isSuspicious = true;
+                    reason = 'Known scam number';
+                }
+            });
+
+            // Check for suspicious patterns
+            if (phone.includes('555-SCAM') || phone.includes('1-800-SCAM')) {
+                isSuspicious = true;
+                reason = 'Suspicious number pattern';
+            }
+
+            let result;
+            if (isSuspicious) {
+                result = {
+                    type: 'danger',
+                    icon: '🚨',
+                    title: 'SCAM NUMBER DETECTED!',
+                    description: `This number is flagged as suspicious: ${reason}. Do not answer calls from this number or provide any personal information.`
+                };
+            } else {
+                result = {
+                    type: 'safe',
+                    icon: '📞',
+                    title: 'Number Appears Normal',
+                    description: 'This number doesn\'t match known scam patterns. However, always be cautious about unsolicited calls asking for personal information.'
+                };
+            }
+
+            showResult(resultDiv, result.type, result.icon, result.title, result.description);
+            console.log('Phone check complete:', result);
+        }
+
+        function showResult(element, type, icon, title, description) {
+            element.className = `result-box result-${type}`;
+            element.innerHTML = `
+                <span class="result-icon">${icon}</span>
+                <div class="result-title">${title}</div>
+                <div class="result-description">${description}</div>
+            `;
+            element.style.display = 'block';
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🛡️ ScamShield initialized successfully!');
+            
+            // Add input listeners for real-time feedback
+            document.getElementById('messageInput').addEventListener('input', function() {
+                if (this.value.length > 20) {
+                    // Auto-analyze after user stops typing for 2 seconds
+                    clearTimeout(this.analyzeTimer);
+                    this.analyzeTimer = setTimeout(analyzeMessage, 2000);
+                }
+            });
+
+            console.log('✅ ScamShield ready to protect users!');
+        });
+
+        // Share functionality
+        function shareScamShield() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ScamShield - Universal Scam Detector',
+                    text: 'Protect yourself and your family from scams with this free tool!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copied to clipboard! Share it with your family and friends.');
+            }
+        }
+    </script>
+</body>
+</html>
